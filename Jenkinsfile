@@ -16,8 +16,8 @@ pipeline {
     stage('Building images') {
       steps{
         script {
-          webImage = docker.build web_imagename
-          apiImage = docker.build api_imagename
+          webImage = docker.build web_imagename, "src/Web/Dockerfile"
+          apiImage = docker.build api_imagename, "src/PublicApi/Dockerfile"
         }
       }
     }
