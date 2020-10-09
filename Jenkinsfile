@@ -26,10 +26,10 @@ pipeline {
         branch 'master'
       }
       steps {
-        withDockerRegistry([ credentialsId: registryCredential, url: "" ]) {
+        withDockerRegistry([ credentialsId: 'registryCredential', url: "" ]) {
           sh 'docker push ${web_imagename}:latest'
           sh 'docker push ${api_imagename}:latest'
-        }
-        
+       }
+    }
   }
 }
