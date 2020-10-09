@@ -10,7 +10,7 @@ try {
   // Run Docker build init
   stage('Build Docker Images') {
     node {
-        docker.withRegistry('', credentialsId) {
+        docker.withRegistry('https://hub.docker.com/', credentialsId) {
         docker.build("eshop-web", "./src/Web/Dockerfile") 
         docker.build("eshop-api", "./src/Web/Dockerfile") 
       }
@@ -20,7 +20,7 @@ try {
   if (env.BRANCH_NAME == 'master') {
     stage('Publish Images') {
       node {
-       docker.withRegistry('', credentialsId) {
+       docker.withRegistry('https://hub.docker.com/', credentialsId) {
            
         }
       }
