@@ -11,8 +11,8 @@ try {
   stage('Build Docker Images') {
     node {
         docker.withRegistry('', credentialsId) {
-        sh "docker build --pull -t jonyjalfon94/eshop-web -f src/Web/Dockerfile ."
-        sh "docker build --pull -t jonyjalfon94/eshop-api -f src/Web/Dockerfile ."
+        sh "docker build --pull -t jonyjalfon94/eshop-web:${BUILD_NUMBER} -f src/Web/Dockerfile ."
+        sh "docker build --pull -t jonyjalfon94/eshop-api:${BUILD_NUMBER} -f src/Web/Dockerfile ."
       }
     }
   }
