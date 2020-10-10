@@ -11,8 +11,9 @@ try {
   stage('Build Docker Images') {
     node {
         docker.withRegistry('', credentialsId) {
-        docker.build("eshop-web", "./src/Web/") 
-        docker.build("eshop-api", "./src/Web/") 
+        //docker.build("eshop-web", "./src/Web/") 
+        sh "docker build --pull -t web -f src/Web/Dockerfile ."
+        //docker.build("eshop-api", "./src/Web/") 
       }
     }
   }
