@@ -16,8 +16,6 @@ try {
       }
     }
   }
-
-  if (env.BRANCH_NAME == 'master') {
     stage('Publish Images') {
       node {
        docker.withRegistry('', credentialsId) {
@@ -25,8 +23,7 @@ try {
          sh "docker push jonyjalfon94/eshop-api:${BUILD_NUMBER}"
         }
       }
-    }
-  }
+    }  
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
