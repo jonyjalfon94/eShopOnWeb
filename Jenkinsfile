@@ -7,13 +7,12 @@ try {
       checkout scm
     }
   }
-  // Run Docker build init
+  // Run Docker build
   stage('Build Docker Images') {
     node {
         docker.withRegistry('', credentialsId) {
-        //docker.build("eshop-web", "./src/Web/") 
-        sh "docker build --pull -t web -f src/Web/Dockerfile ."
-        //docker.build("eshop-api", "./src/Web/") 
+        sh "docker build --pull -t jonyjalfon94/eshop-web -f src/Web/Dockerfile ."
+        sh "docker build --pull -t jonyjalfon94/eshop-api -f src/Web/Dockerfile ."
       }
     }
   }
@@ -22,7 +21,8 @@ try {
     stage('Publish Images') {
       node {
        docker.withRegistry('', credentialsId) {
-           
+         sh "docker push jonyjalfon94/eshop-web:${BUILD_NUMBER}"
+         sh "docker push jonyjalfon94/eshop-api:${BUILD_NUMBER}"
         }
       }
     }
