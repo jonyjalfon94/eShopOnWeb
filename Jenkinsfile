@@ -8,22 +8,26 @@ try {
     }
   }
   // Run Docker build
-  stage('Build Docker Images') {
+  stage('Build Docker Images and run containers') {
     node {
         docker.withRegistry('', credentialsId) {
-        sh "docker build --pull -t jonyjalfon94/eshop-web:${BUILD_NUMBER} -f src/Web/Dockerfile ."
-        sh "docker build --pull -t jonyjalfon94/eshop-api:${BUILD_NUMBER} -f src/Web/Dockerfile ."
+        //sh "docker build --pull -t jonyjalfon94/eshop-web:${BUILD_NUMBER} -f src/Web/Dockerfile ."
+        //sh "docker build --pull -t jonyjalfon94/eshop-api:${BUILD_NUMBER} -f src/Web/Dockerfile ."
+        sh "sudo docker-compose build"
+        sh "sudo docker-compose up"
       }
     }
   }
-    stage('Publish Images') {
-      node {
-       docker.withRegistry('', credentialsId) {
-         sh "docker push jonyjalfon94/eshop-web:${BUILD_NUMBER}"
-         sh "docker push jonyjalfon94/eshop-api:${BUILD_NUMBER}"
+    if (env.BRANCH_NAME == 'master') {
+      stage('Publish Images') {
+        node {
+          docker.withRegistry('', credentialsId) {
+            sh "docker push jonyjalfon94/eshop-web:${BUILD_NUMBER}"
+            sh "docker push jonyjalfon94/eshop-api:${BUILD_NUMBER}"
+          }
         }
       }
-    }  
+    }
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
