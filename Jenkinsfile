@@ -11,8 +11,10 @@ try {
   stage('Build Docker Images') {
     node {
         docker.withRegistry('', credentialsId) {
-        sh "docker build --pull -t jonyjalfon94/eshop-web:${BUILD_NUMBER} -f src/Web/Dockerfile ."
-        sh "docker build --pull -t jonyjalfon94/eshop-api:${BUILD_NUMBER} -f src/Web/Dockerfile ."
+        //sh "docker build --pull -t jonyjalfon94/eshop-web:${BUILD_NUMBER} -f src/Web/Dockerfile ."
+        //sh "docker build --pull -t jonyjalfon94/eshop-api:${BUILD_NUMBER} -f src/Web/Dockerfile ."
+          sh "sudo docker-compose build"
+          sh "sudo docker-compose up"
       }
     }
   }
@@ -20,10 +22,11 @@ try {
       stage('Publish Images') {
         node {
           docker.withRegistry('', credentialsId) {
-            sh "docker push jonyjalfon94/eshop-web:${BUILD_NUMBER}"
-            sh "docker push jonyjalfon94/eshop-web:latest"
-            sh "docker push jonyjalfon94/eshop-api:${BUILD_NUMBER}"
-            sh "docker push jonyjalfon94/eshop-api:latest"
+            //sh "docker push jonyjalfon94/eshop-web:${BUILD_NUMBER}"
+            //sh "docker push jonyjalfon94/eshop-web:latest"
+            //sh "docker push jonyjalfon94/eshop-api:${BUILD_NUMBER}"
+            //sh "docker push jonyjalfon94/eshop-api:latest"
+            sh "sudo docker-compose push"
           }
         }
       }
