@@ -31,12 +31,6 @@ try {
         }
       }
     }
- post {
-        success {
-            echo 'Run eshop-infrastructure pipeline!'
-            build job: 'eshop-infra'
-        }
-    }
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
