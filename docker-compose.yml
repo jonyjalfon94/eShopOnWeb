@@ -1,13 +1,13 @@
 version: '3.4'
 
 services:
-  eshopwebmvc:
-    image: ${DOCKER_REGISTRY-}eshopwebmvc
+  eshop-web:
+    image: jonyjalfon94/eshop-web
     build:
       context: .
       dockerfile: src/Web/Dockerfile
-  eshoppublicapi:
-    image: ${DOCKER_REGISTRY-}eshoppublicapi
+  eshop-api:
+    image: jonyjalfon94/eshop-api
     build:
       context: .
       dockerfile: src/PublicApi/Dockerfile
