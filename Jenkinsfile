@@ -14,7 +14,7 @@ try {
         //sh "docker build --pull -t jonyjalfon94/eshop-web:${BUILD_NUMBER} -f src/Web/Dockerfile ."
         //sh "docker build --pull -t jonyjalfon94/eshop-api:${BUILD_NUMBER} -f src/Web/Dockerfile ."
           sh "docker-compose build"
-          sh "docker-compose up"
+          sh "docker-compose up -d"
       }
     }
   }
