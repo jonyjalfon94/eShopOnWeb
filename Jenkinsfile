@@ -31,7 +31,7 @@ try {
         }
       }
     }
-  build job: 'eshop-infra\master'
+  build job: 'eshop-infra'
   currentBuild.result = 'SUCCESS'
 }
 catch (org.jenkinsci.plugins.workflow.steps.FlowInterruptedException flowError) {
